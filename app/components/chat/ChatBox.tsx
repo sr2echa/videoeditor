@@ -292,8 +292,8 @@ export function ChatBox({
 
   return (
     <div className={`h-full flex flex-col bg-background ${className}`}>
-      {/* Chat Header */}
-      <div className="h-9 border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex items-center justify-between px-3 shrink-0">
+      {/* Chat Header - Fixed height */}
+      <div className="h-9 border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex items-center justify-between px-3 flex-shrink-0">
         <div className="flex items-center gap-2">
           <Bot className="h-3.5 w-3.5 text-muted-foreground" />
           <span className="text-sm font-medium tracking-tight">Ask Kimu</span>
@@ -316,8 +316,8 @@ export function ChatBox({
         )}
       </div>
 
-      {/* Content Area */}
-      <div className="flex-1 flex flex-col">
+      {/* Messages Area - Takes remaining space */}
+      <div className="flex-1 flex flex-col min-h-0">
         {messages.length === 0 ? (
           // Default clean state - Copilot style
           <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
@@ -353,11 +353,10 @@ export function ChatBox({
             </div>
           </div>
         ) : (
-          // Messages Area
+          // Messages scrollable area
           <div
             ref={scrollContainerRef}
             className="flex-1 overflow-y-auto p-3 scroll-smooth"
-            style={{ maxHeight: "calc(100vh - 200px)" }}
           >
             <div className="space-y-3">
               {messages.map((message) => (
@@ -426,8 +425,8 @@ export function ChatBox({
         )}
       </div>
 
-      {/* Input Area with enhanced overlap effect */}
-      <div className="relative bg-gradient-to-t from-background to-background/50 p-3 border-t border-border/30 backdrop-blur-sm -mt-2 pt-4">
+      {/* Input Area - Fixed height at bottom */}
+      <div className="relative bg-gradient-to-t from-background to-background/50 p-3 border-t border-border/30 backdrop-blur-sm flex-shrink-0">
         {/* Mentions Dropdown */}
         {showMentions && filteredMentions.length > 0 && (
           <div
